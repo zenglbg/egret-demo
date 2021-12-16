@@ -43,7 +43,7 @@ class BeginScene extends eui.Component implements eui.UIComponent {
     this.addChild(begin);
     begin.x = (this.stage.stageWidth - begin.width) / 2;
     begin.y = this.stage.stageHeight / 2;
-	begin.touchEnabled = true
+    begin.touchEnabled = true;
     begin.addEventListener(
       egret.TouchEvent.TOUCH_TAP,
       () => {

@@ -120,13 +120,13 @@ class PlayScene extends eui.Component implements eui.UIComponent {
       this.state.total++;
     }
   }
-
+  /**初始化 */
   private init() {
     this.initPool();
     this.pigsFeetMove();
     this.goMon();
   }
-
+  /**初始化礼物池 */
   private initPool() {
     for (let index = 0; index < 100; index++) {
       const bomb = new Bomb(this);
@@ -134,6 +134,7 @@ class PlayScene extends eui.Component implements eui.UIComponent {
     }
   }
 
+  /**从礼物池中获取礼物 */
   private getBomb() {
     for (let index = 0; index < this.bombs.length; index++) {
       const element = this.bombs[index];
@@ -143,30 +144,28 @@ class PlayScene extends eui.Component implements eui.UIComponent {
     }
   }
 
+  /**
+   * 递归使用注入礼物
+   */
   private goMon() {
     this.touter && clearTimeout(this.touter);
     this.touter = setTimeout(() => {
       const x = Math.random() * (this.stage.stageWidth - 50 - 0 + 1) + 0;
       const bomb = this.getBomb();
-      console.log(bomb);
       bomb.use(
         Math.random() >= 0.5 ? IndentityType.GIFT : IndentityType.BOMB,
         x
       );
       this.addChild(bomb);
       this.goMon();
-    }, Math.random() * 1000 * 3);
+    }, Math.random() * 1000 * 1);
   }
 
-  private isHit(x: number, y: number) {
-    // this.bombs.forEach((bomb, index) => {
-    //   if (bomb.hitTestPoint(this.offsetX, this.offsetY)) {
-    //     const [_bomb] = this.bombs.splice(index, 1);
-    //     this.total++;
-    //     this.removeChild(_bomb);
-    //   }
-    // });
+  private onResult() {
+    Http.getResult({}).then((res) => {});
   }
+
+  /**对猪脚移动进行控制 */
   private pigsFeetMove() {
     this.pigsFeet.touchEnabled = true;
     this.pigsFeet.addEventListener(
@@ -186,11 +185,11 @@ class PlayScene extends eui.Component implements eui.UIComponent {
     this.offsetY = this.pigsFeet.y;
     // this.offsetY = e.stageY - this.pigsFeet.y;
     //手指在屏幕上移动，会触发 onMove 方法
-    console.log("手指在屏幕上移动，会触发 onMove 方法");
+    // console.log("手指在屏幕上移动，会触发 onMove 方法");
     this.stage.addEventListener(egret.TouchEvent.TOUCH_MOVE, this.onMove, this);
   }
   private stopMove() {
-    console.log("手指离开屏幕，移除手指移动的监听");
+    // console.log("手指离开屏幕，移除手指移动的监听");
     this.stage.removeEventListener(
       egret.TouchEvent.TOUCH_MOVE,
       this.onMove,
@@ -198,9 +197,9 @@ class PlayScene extends eui.Component implements eui.UIComponent {
     );
   }
   private onMove(e: egret.TouchEvent) {
-    console.log(
-      ` 通过计算手指在屏幕上的位置，计算当前对象的坐标，达到跟随手指移动的效果`
-    );
+    // console.log(
+    //   ` 通过计算手指在屏幕上的位置，计算当前对象的坐标，达到跟随手指移动的效果`
+    // );
     this.pigsFeet.x = e.stageX - this.offsetX;
     // this.pigsFeet.y = e.stageY - this.offsetY;
     this.pigsFeet.y = this.offsetY;
