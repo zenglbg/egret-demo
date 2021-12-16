@@ -137,9 +137,9 @@
 			"url": "config/description.json"
 		},
 		{
-			"name": "ban_png",
+			"name": "pigs_feet_png",
 			"type": "image",
-			"url": "play/ban.png"
+			"url": "play/pigsFeet.png"
 		},
 		{
 			"name": "bg_png",

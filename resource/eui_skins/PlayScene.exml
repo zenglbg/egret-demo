@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="PlaySceneSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" >
-	<w:Config id="17dbdbc7150" ></w:Config>
+<e:Skin class="PlaySceneSkin" width="750" height="1334" xmlns:e="http://ns.egret.com/eui"
+        xmlns:w="http://ns.egret.com/wing">
+	<w:Config id="17dbdbc7150"></w:Config>
+	<e:Group x="30" y="30">
+		<e:Label text="积分:" />
+		<e:Label text="{state.total}" />
+		<e:layout>
+			<e:HorizontalLayout/>
+		</e:layout>
+	</e:Group>
+	<e:Image source="hero_png" x="201" y="102" />
+	<e:Image id="pigsFeet" source="pigs_feet_png" x="322" y="1226" />
 </e:Skin>
