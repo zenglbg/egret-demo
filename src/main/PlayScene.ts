@@ -89,7 +89,8 @@ class Bomb extends egret.DisplayObjectContainer {
 }
 
 class PlayScene extends eui.Component implements eui.UIComponent {
-  skinName: string = "resource/eui_skins/PlayScene.exml";
+  public skinName: string = "resource/eui_skins/PlayScene.exml";
+  
   private state = {
     total: 0,
   };
@@ -135,7 +136,7 @@ class PlayScene extends eui.Component implements eui.UIComponent {
   }
 
   /**从礼物池中获取礼物 */
-  private getBomb() {
+  private getBomb(): Bomb {
     for (let index = 0; index < this.bombs.length; index++) {
       const element = this.bombs[index];
       if (element.isUse === false) {
@@ -152,11 +153,12 @@ class PlayScene extends eui.Component implements eui.UIComponent {
     this.touter = setTimeout(() => {
       const x = Math.random() * (this.stage.stageWidth - 50 - 0 + 1) + 0;
       const bomb = this.getBomb();
-      bomb.use(
-        Math.random() >= 0.5 ? IndentityType.GIFT : IndentityType.BOMB,
-        x
-      );
-      this.addChild(bomb);
+      bomb &&
+        bomb.use(
+          Math.random() >= 0.5 ? IndentityType.GIFT : IndentityType.BOMB,
+          x
+        );
+      bomb && this.addChild(bomb);
       this.goMon();
     }, Math.random() * 1000 * 1);
   }
